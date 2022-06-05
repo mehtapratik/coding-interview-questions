@@ -58,6 +58,7 @@ class BST {
 //
 // CODE
 //
+// O(n)T | O(n)S
 function minHeightBst(array) {
   return buildTree(array, 0, array.length - 1);
 

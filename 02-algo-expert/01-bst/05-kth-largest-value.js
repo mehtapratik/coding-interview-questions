@@ -36,7 +36,32 @@ class BST {
 //
 // CODE
 //
+
+// 1. OPTIMAL APPROACH
+// =====================
+// O(h + k)T | O(h)S
+// You have to go all the way to right of three (h) first and then find kth largest
+// node in reverseInOrder fashion. Thefore, time complexity is O(h + k). And since,
+// our callstack will reach upto h levels, space complexity is O(h).
 function findKthLargestValueInBst(tree, k) {
+  reverseInOrderTraversal(tree, k, null);
+  return kthLargestValue;
+}
+
+function reverseInOrderTraversal(node, k, parent) {
+  if (node == null) return;
+  reverseInOrderTraversal(node.right, k, node);
+  if (visitedNodeCount < k && parent?.value !== node.value) {
+    visitedNodeCount += 1;
+    kthLargestValue = node.value;
+  }
+  reverseInOrderTraversal(node.left, k, node);
+}
+
+// 1. BRUTE-FORCE APPROACH
+// =====================
+//O(n)T | O(n)S
+function findKthLargestValueInBst_BruteForce(tree, k) {
   let sortedValues = [];
   sortedValues = inOrderTraversal(tree, sortedValues);
   if (sortedValues.length < k) {
