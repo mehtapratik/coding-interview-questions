@@ -22,7 +22,7 @@
 //      9
 //
 // output:
-// 4 <-> 9  <-> 2 <-> 1 <-> 6 <-> 3 <-> 7
+// 4 <-> 9 <-> 2 <-> 1 <-> 6 <-> 3 <-> 7
 //
 
 //
@@ -39,6 +39,27 @@ class BT {
 //
 // CODE
 //
+// O(N)T | O(n)S
+function flattenBinaryTreeBruteForce(root) {
+   const nodes = inOrderTraversal(root, []);
+   for (let i = 1; i < nodes.length; i++) {
+      const [prev, curr] = [nodes[i - 1], nodes[i]];
+      console.log(prev?.value, " <-> ", curr?.value);
+      prev.right = curr;
+      curr.left = prev;
+   }
+   return nodes[0];
+}
+
+function inOrderTraversal(node, array) {
+   if (node == null) return array;
+   inOrderTraversal(node.left, array);
+   array.push(node);
+   inOrderTraversal(node.right, array);
+   return array;
+}
+
+// O(n)T | O(d)S
 function flattenBinaryTree(root) {
    const [l, _] = convertTreeToLinkedList(root);
    return l;
@@ -104,4 +125,7 @@ four.right = nine;
 three.left = six;
 three.right = seven;
 
-flattenBinaryTree(root);
+// Since tree "root" is changed by ref. you can only pass root to one of these methods
+// calling both methods at the same execution will not work.
+// flattenBinaryTree(root);
+flattenBinaryTreeBruteForce(root);
