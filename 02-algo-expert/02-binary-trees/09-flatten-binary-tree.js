@@ -39,6 +39,7 @@ class BT {
 //
 // CODE
 //
+// O(n)T | O(d)S
 function flattenBinaryTree(root) {
    const [l, _] = convertTreeToLinkedList(root);
    return l;
