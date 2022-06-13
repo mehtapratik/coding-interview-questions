@@ -36,6 +36,19 @@ class TreeNode {
 //
 // CODE
 //
+// Worst Case O(n^2)T | O(n)S
+// Average Case: O(NlogN) | O(logN)S
+// The time complexity of the above algorithm is O(n^2) in the worst case,
+// where ‘N’ is the total number of nodes in the tree. This is due to the fact
+// that we traverse each node once, but for every node, we iterate the current path.
+// The current path, in the worst case, can be O(n) in the case of a skewed tree).
+// But, if the tree is balanced, then the current path will be equal to the height of the tree,
+// i.e., O(log(n)).So the best case of our algorithm will be O((n)log(n)).
+//
+// The space complexity of the above algorithm will be O(n). This space will be used to
+// store the recursion stack.The worst case will happe O(n) space for storing the
+// currentPath in the worst case. But, if the tree is balanced, then currentPath will store
+// only log(n) frames in stack. Therefore, average case space complexity will be O(log(n)).
 function countPaths(rootNode, sum) {
    return countPathsRecursive(rootNode, sum, []);
 }
