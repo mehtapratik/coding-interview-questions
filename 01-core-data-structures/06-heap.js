@@ -89,6 +89,11 @@ class Heap {
       return this.heap?.[0];
    }
 
+   // O(1)T | O(1)S
+   length() {
+      return this.heap?.length || 0;
+   }
+
    print() {
       console.log(this.heap);
    }
