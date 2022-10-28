@@ -50,52 +50,47 @@
 // CODE
 //
 const find_permutations = function (nums) {
-   const result = [];
    // RECURSIVE SOLUTION
-   // find_permutations_recursive(nums, 0, [], result);
-   // return result;
+   // return find_permutations_recursive(nums, 0, [], []);
    //
    // OR
    //
    // ITERATIVE SOLUTION
-   const NUM_COUNT = nums.length;
-   const permutations = [[]];
 
-   for (let i = 0; i < NUM_COUNT; i++) {
+   const permutations = [];
+   for (let i = 0; i < nums.length; i++) {
       const currentNum = nums[i];
       const PERM_COUNT = permutations.length;
 
       for (let j = 0; j < PERM_COUNT; j++) {
          const currentPerm = permutations.shift();
          for (let k = 0; k < currentPerm.length + 1; k++) {
-            const newPerm = currentPerm.slice(0);
-            newPerm.splice(k, 0, currentNum);
-            if (newPerm.length === NUM_COUNT) {
-               result.push(newPerm);
-            } else {
-               permutations.push(newPerm);
-            }
+            const nextPerm = currentPerm.slice(0);
+            nextPerm.splice(k, 0, currentNum);
+            permutations.push(nextPerm);
          }
       }
    }
-   return result;
+   return permutations;
 };
 
 const find_permutations_recursive = function (
    nums,
    index,
-   currentPermutation,
-   result
+   currentPerm,
+   permutations
 ) {
    if (index === nums.length) {
-      result.push(currentPermutation);
+      permutations.push(currentPerm);
    } else {
-      for (let i = 0; i < currentPermutation.length + 1; i++) {
-         const newPermutation = currentPermutation.slice(0);
-         newPermutation.splice(i, 0, nums[index]);
-         find_permutations_recursive(nums, index + 1, newPermutation, result);
+      for (let i = 0; i < currentPerm.length + 1; i++) {
+         const nextPerm = [...currentPerm];
+         nextPerm.splice(i, 0, nums[index]);
+         find_permutations_recursive(nums, index + 1, nextPerm, permutations);
       }
    }
+
+   return permutations;
 };
 
 //
