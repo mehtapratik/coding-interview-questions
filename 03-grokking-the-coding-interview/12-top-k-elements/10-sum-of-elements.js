@@ -26,6 +26,10 @@
 function sumOfElements(numbers, k1, k2) {
    const maxHeap = new Heap([], null, (a, b) => a - b);
    for (let number of numbers) {
+      // We want to store only k1 - 1 small numbers in heap because
+      // we want to find sum of all number "between" k1th and k2th not
+      // including k1th and k2th. Therefore, storing k2th smallest number
+      // is not useful
       if (maxHeap.length < k2 - 1) {
          maxHeap.push(number);
       } else if (maxHeap.peek() > number) {
@@ -35,6 +39,8 @@ function sumOfElements(numbers, k1, k2) {
    }
 
    let sum = 0;
+   // Keep poping and suming all numbers from heap until its length reaches either
+   // k1th small number or zero whicher earlier
    while (maxHeap.length > Math.max(k1, 0)) {
       sum += maxHeap.pop();
    }
