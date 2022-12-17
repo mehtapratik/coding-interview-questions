@@ -42,7 +42,7 @@ class ItemDescription {
 // CODE
 //
 function zeroOrOneknapsack(items, capacity) {
-   return buTabulationC(0, capacity);
+   return bottomUpTabulation();
 
    // COMPLEXITY ANALYSIS
    // -------------------->
@@ -186,8 +186,21 @@ function zeroOrOneknapsack(items, capacity) {
          }
       }
 
+      showSelectedItems(profitTable);
       // maximum profit will be at the bottom-right corner.
       return profitTable[items.length - 1][capacity];
+   }
+
+   function showSelectedItems(dp) {
+      let remainingCapacity = capacity;
+      let remainingProfit = dp[items.length - 1][capacity].profit;
+      for (let i = items.length - 1; i > 0; i--) {
+         if (remainingProfit !== dp[i - 1][remainingCapacity].profit) {
+            console.log(items[i]);
+            remainingCapacity -= items[i].weight;
+            remainingProfit -= items[i].profit;
+         }
+      }
    }
 
    // COMPLEXITY ANALYSIS

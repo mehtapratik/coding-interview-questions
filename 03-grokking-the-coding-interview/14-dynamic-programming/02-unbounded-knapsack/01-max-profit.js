@@ -70,7 +70,6 @@ function maxProfit(items, capacity) {
       while (i < items.length && remainingCapacity > 0) {
          const item = items[i++];
          while (item.weight <= remainingCapacity) {
-            console.log("here");
             maxProfit += item.profit;
             remainingCapacity -= item.weight;
          }
@@ -129,53 +128,64 @@ function maxProfit(items, capacity) {
 
    // O(n * c)T | O(C)S
    function tabulation() {
-      const dp = Array(2)
+      const ITEMS_COUNT = items.length;
+      const dp = Array(ITEMS_COUNT)
          .fill(0)
          .map(() => Array(capacity + 1).fill(0));
 
-      const ITEMS_COUNT = items.length;
-
       for (let n = 0; n < ITEMS_COUNT; n++) {
          for (let c = 0; c <= capacity; c++) {
-            const prevDPRow = Math.abs((n - 1) % 2);
-            const currDPRow = n % 2;
+            const inclusionProfit =
+               items[n].weight <= c
+                  ? items[n].profit + dp[n][c - items[n].weight]
+                  : 0;
 
-            const currItem = items[n];
-            let inclusionProfit = 0;
-            if (currItem.weight <= c) {
-               inclusionProfit =
-                  currItem.profit + dp[currDPRow][c - currItem.weight];
-            }
+            const exclusionProfit = n > 0 ? dp[n - 1][c] : 0;
 
-            const exclusionProfit = dp[prevDPRow][c];
-
-            dp[currDPRow][c] = Math.max(inclusionProfit, exclusionProfit);
+            dp[n][c] = Math.max(inclusionProfit, exclusionProfit);
          }
       }
 
-      return dp[(ITEMS_COUNT - 1) % 2][capacity];
+      showSelectedItems(dp);
+      return dp[ITEMS_COUNT - 1][capacity];
+   }
+
+   function showSelectedItems(dp) {
+      console.log(dp);
+      let remainingCapacity = capacity;
+      let remainingProfit = dp[items.length - 1][capacity];
+      let i = items.length - 1;
+      while (remainingProfit > 0) {
+         if (i === 0 || remainingProfit !== dp[i - 1][remainingCapacity]) {
+            console.log(items[i]);
+            remainingCapacity -= items[i].weight;
+            remainingProfit -= items[i].profit;
+         } else {
+            i--;
+         }
+      }
    }
 }
 
 //
 // TEST
 //
-const items = [
-   { weight: 1, profit: 15 },
-   { weight: 3, profit: 50 },
-   { weight: 4, profit: 60 },
-   { weight: 5, profit: 90 },
-];
-
 // const items = [
 //    { weight: 1, profit: 15 },
-//    { weight: 2, profit: 20 },
 //    { weight: 3, profit: 50 },
+//    { weight: 4, profit: 60 },
+//    { weight: 5, profit: 90 },
 // ];
+
+const items = [
+   { weight: 1, profit: 15 },
+   { weight: 2, profit: 20 },
+   { weight: 3, profit: 50 },
+];
 
 // const items = [
 //    { weight: 2, profit: 20 },
 //    { weight: 2, profit: 10 },
 // ];
 
-console.log(maxProfit(items, 8));
+console.log(maxProfit(items, 5));
