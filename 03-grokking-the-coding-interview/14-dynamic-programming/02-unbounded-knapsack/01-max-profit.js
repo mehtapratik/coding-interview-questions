@@ -67,7 +67,7 @@ function maxProfit(items, capacity) {
       let maxProfit = 0;
       let remainingCapacity = capacity;
       let i = 0;
-      while (i < items.length && remainingCapacity > 0) {
+      while (i < items.length || remainingCapacity > 0) {
          const item = items[i++];
          while (item.weight <= remainingCapacity) {
             maxProfit += item.profit;
