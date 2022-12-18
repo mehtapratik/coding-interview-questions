@@ -29,6 +29,7 @@ function minChange(coins, amount) {
    // return tabulation();
    return tabulationCompressed();
 
+   // O(2 ^ (c + a))TS
    function dfs(index, remainingAmount) {
       // base case -> you cannot use any coins if remaining amount is zero
       if (remainingAmount === 0) {
@@ -67,6 +68,7 @@ function minChange(coins, amount) {
       }
    }
 
+   // O(c * a)TS
    function memoization(index, remainingAmount) {
       const CACHE_KEY = `${index},${remainingAmount}`;
       if (CACHE_KEY in cache) {
@@ -99,6 +101,7 @@ function minChange(coins, amount) {
       return cache[CACHE_KEY];
    }
 
+   // O(c * a)TS
    function tabulation() {
       const table = Array(coins.length)
          .fill(0)
@@ -134,6 +137,7 @@ function minChange(coins, amount) {
    // if you use further optimizations techniques on DP table, such as using just 2 rows
    // or 1 row, you lose ability to identify exact coins used to generate
    // given amount.
+   // O(a)T | O(1)S
    function showSelectedCoins(table) {
       let remainingAmount = amount;
       let c = table.length - 1;
@@ -152,6 +156,7 @@ function minChange(coins, amount) {
       }
    }
 
+   // O(c * a)T | O(a)S
    function tabulationCompressed() {
       const table = Array(amount + 1).fill(Number.MAX_VALUE);
 
