@@ -15,8 +15,8 @@
 //
 // Denominations: {1,99,100}
 // Total amount: 396
-// Output: 1
-// Explanation: We need a minimum of one coins {99} to make a total of '396'
+// Output: 4
+// Explanation: We need a minimum of four coins {99} to make a total of '396'
 //
 
 //
