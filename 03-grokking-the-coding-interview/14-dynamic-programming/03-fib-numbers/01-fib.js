@@ -37,7 +37,7 @@ function fib(n) {
          return cache[n];
       }
 
-      return fib(n - 1) + fib(n - 2);
+      return memoization(n - 1) + memoization(n - 2);
    }
 
    // O(n)TS
