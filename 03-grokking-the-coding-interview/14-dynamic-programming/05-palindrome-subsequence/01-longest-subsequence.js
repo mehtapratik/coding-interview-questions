@@ -34,7 +34,9 @@ function longestPalindromeLength(sequence) {
 
    const cache = {};
    // return recursive(0, sequence.length - 1);
-   return memoization(0, sequence.length - 1);
+   // return memoization(0, sequence.length - 1);
+   // return tabulation();
+   return tabulation_alternate_implementation();
 
    // O(2^N)T | O(N)S
    function recursive(startIndex, endIndex) {
@@ -99,14 +101,64 @@ function longestPalindromeLength(sequence) {
       return cache[CACHE_KEY];
    }
 
-   // tabulation approach skipped since time complexity is same as memoization
-   // and it involves complex implementation
+   //O(n^2)TS
+   function tabulation() {
+      let table = Array(sequence.length)
+         .fill(0)
+         .map(() => Array(sequence.length).fill(0));
+
+      for (let i = 0; i < sequence.length; i++) {
+         table[i][i] = 1;
+      }
+
+      for (let start = sequence.length - 1; start >= 0; start--) {
+         for (let end = start + 1; end < sequence.length; end++) {
+            if (sequence[start] === sequence[end]) {
+               table[start][end] = 2 + table[start + 1][end - 1];
+            } else {
+               table[start][end] = Math.max(
+                  table[start + 1][end],
+                  table[start][end - 1]
+               );
+            }
+         }
+      }
+
+      return table[0][sequence.length - 1];
+   }
+
+   // O(n^2)TS
+   function tabulation_alternate_implementation() {
+      let table = Array(sequence.length)
+         .fill(0)
+         .map(() => Array(sequence.length).fill(0));
+
+      for (let i = 0; i < sequence.length; i++) {
+         table[i][i] = 1;
+      }
+
+      for (let start = 0; start < sequence.length; start++) {
+         for (let end = start - 1; end >= 0; end--) {
+            if (sequence[start] === sequence[end]) {
+               table[start][end] = 2 + table[start - 1][end + 1];
+            } else {
+               table[start][end] = Math.max(
+                  table[start - 1][end],
+                  table[start][end + 1]
+               );
+            }
+         }
+      }
+      return table[sequence.length - 1][0];
+   }
+
+   //TODO: Identify how to decode tabulation to show generated palindrome from original string
 }
 
 //
 // TEST
 //
-console.log(longestPalindromeLength("abdbca"));
+console.log(longestPalindromeLength("cdeafa")); // abdba
 console.log(longestPalindromeLength("cddpd"));
 console.log(longestPalindromeLength("pqrs"));
 console.log(longestPalindromeLength(""));
