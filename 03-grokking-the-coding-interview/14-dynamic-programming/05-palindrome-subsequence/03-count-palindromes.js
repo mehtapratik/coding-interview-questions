@@ -57,16 +57,15 @@ function countPalindromes(input) {
          return 1;
       }
 
-      return (
-         // add one to the count if there is a palindrome between current `start` and `end` indicies
-         // prettier-ignore
-         isPalindrome(startIndex, endIndex) ? 1 : 0 +
-         recursive(startIndex + 1, endIndex) +
-         recursive(startIndex, endIndex - 1) -
-         // we're adding middle palindromes (from `start+1` to `end-1`) count twice above, 
-         // therefore reduce one
-         recursive(startIndex + 1, endIndex - 1)
-      );
+      // add one to the count if there is a palindrome between current `start` and `end` indicies
+      let count = isPalindrome(startIndex, endIndex) ? 1 : 0;
+
+      count += recursive(startIndex + 1, endIndex);
+      count += recursive(startIndex, endIndex - 1);
+      // we're adding middle palindromes (from `start+1` to `end-1`) count twice above, therefore reduce one
+      count -= recursive(startIndex + 1, endIndex - 1);
+
+      return count;
    }
 
    // O(n^2)TS --> Actual: O([n-1]^2 + n)T
@@ -81,13 +80,15 @@ function countPalindromes(input) {
       } else if (startIndex === endIndex) {
          cache[CACHE_KEY] = 1;
       } else {
-         // prettier-ignore
-         cache[CACHE_KEY] = (
-              isPalindrome(startIndex, endIndex) ? 1 : 0 +
-              memoization(startIndex + 1, endIndex) +
-              memoization(startIndex, endIndex - 1) -
-              memoization(startIndex + 1, endIndex - 1)
-         );
+         // add one to the count if there is a palindrome between current `start` and `end` indicies
+         let count = isPalindrome(startIndex, endIndex) ? 1 : 0;
+
+         count += recursive(startIndex + 1, endIndex);
+         count += recursive(startIndex, endIndex - 1);
+         // we're adding middle palindromes (from `start+1` to `end-1`) count twice above, therefore reduce one
+         count -= recursive(startIndex + 1, endIndex - 1);
+
+         cache[CACHE_KEY] = count;
       }
 
       return cache[CACHE_KEY];
