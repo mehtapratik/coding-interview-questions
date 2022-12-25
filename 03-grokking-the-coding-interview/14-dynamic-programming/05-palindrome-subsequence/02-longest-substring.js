@@ -53,7 +53,7 @@ function longestPalindromicLength(input) {
          }
 
          // OR - time and space complexity will still be same
-         // if (isPalindrome(input.substring(startIndex, endIndex + 1))) {
+         // if (isPalindrome(startIndex, endIndex)) {
          //    return endIndex - startIndex + 1;
          // }
       }
@@ -99,20 +99,6 @@ function longestPalindromicLength(input) {
       return cache[CACHE_KEY];
    }
 
-   function isPalindrome(input) {
-      let startIndex = 0;
-      let endIndex = input.length - 1;
-      while (startIndex <= endIndex) {
-         if (input[startIndex] !== input[endIndex]) return false;
-         else {
-            startIndex++;
-            endIndex--;
-         }
-      }
-
-      return true;
-   }
-
    // O(n^2)TS
    function tabulation() {
       const table = Array(input.length)
@@ -129,8 +115,11 @@ function longestPalindromicLength(input) {
          // cols of matrix -> go reverse from previous character of start
          // position to first character of the string
          for (let end = start - 1; end >= 0; end--) {
+            // cell above will hold length of longest palindrome at left
             const longestPalindromeAtLeft = table[start - 1][end];
+            // cell next will hold length of longest palindrome at right
             const longestPalindromeAtRight = table[start][end + 1];
+            // cell on top/right holds longest length of inner palindrome, if any
             const innerPalindromeLength = table[start - 1][end + 1];
             // every character is at least its own palindrome
             let currentPalindromeLength = 1;
@@ -157,6 +146,15 @@ function longestPalindromicLength(input) {
       }
       return table[input.length - 1][0];
    }
+
+   const isPalindrome = (from, to) => {
+      while (from < to) {
+         if (input[from++] !== input[to--]) {
+            return false;
+         }
+      }
+      return true;
+   };
 }
 
 //

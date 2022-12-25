@@ -35,20 +35,27 @@ function countPalindromes(input) {
    // return memoization(0, input.length - 1);
    return tabulation();
 
+   // O(3^n)TS
    function recursive(startIndex, endIndex) {
+      // negative base case -> `start` and `end` indicies are flipped
       if (startIndex > endIndex) {
          return 0;
       }
 
+      // positive base case -> `start` and `end` indicies are same.
+      // single character counts as its own palindrome
       if (startIndex === endIndex) {
          return 1;
       }
 
       return (
+         // add one to the count if there is a palindrome between current `start` and `end` indicies
          // prettier-ignore
          isPalindrome(startIndex, endIndex) ? 1 : 0 +
          recursive(startIndex + 1, endIndex) +
          recursive(startIndex, endIndex - 1) -
+         // we're adding middle palindromes (from `start+1` to `end-1`) count twice above, 
+         // therefore reduce one
          recursive(startIndex + 1, endIndex - 1)
       );
    }
@@ -85,6 +92,7 @@ function countPalindromes(input) {
          .fill(false)
          .map(() => Array(input.length).fill(false));
 
+      // every character on its own is palindrome
       for (let i = 0; i < input.length; i++) {
          table[i][i] = true;
          count++;
@@ -92,6 +100,7 @@ function countPalindromes(input) {
 
       for (let start = 0; start < input.length; start++) {
          for (let end = start - 1; end >= 0; end--) {
+            // adjacent top/right cell will be true if inner string is palindrome
             const isInnerStringPalindrome = table[start - 1][end + 1];
             const isTwoCharString = start - end === 1;
 
