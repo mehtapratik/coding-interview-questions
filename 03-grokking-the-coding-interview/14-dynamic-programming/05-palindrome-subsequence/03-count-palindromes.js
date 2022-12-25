@@ -29,6 +29,15 @@ function countPalindromes(input) {
       return 0;
    }
 
+   const isPalindrome = (from, to) => {
+      while (from < to) {
+         if (input[from++] !== input[to--]) {
+            return false;
+         }
+      }
+      return true;
+   };
+
    const cache = {};
 
    // return recursive(0, input.length - 1);
@@ -114,15 +123,6 @@ function countPalindromes(input) {
       }
       return count;
    }
-
-   const isPalindrome = (from, to) => {
-      while (from < to) {
-         if (input[from++] !== input[to--]) {
-            return false;
-         }
-      }
-      return true;
-   };
 }
 
 //
