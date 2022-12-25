@@ -133,18 +133,30 @@ function longestPalindromeLength(sequence) {
          .fill(0)
          .map(() => Array(sequence.length).fill(0));
 
+      // at the very least, every character is its own palindrome
       for (let i = 0; i < sequence.length; i++) {
          table[i][i] = 1;
       }
 
+      // rows of matrix -> start with 0th char until end of the string
       for (let start = 0; start < sequence.length; start++) {
+         // cols of matrix -> go reverse from previous character of start
+         // position to first character of the string
          for (let end = start - 1; end >= 0; end--) {
+            // cell above will hold length of longest palindrome at left
+            const innerPalindromeLength = table[start - 1][end + 1];
+            // cell next will hold length of longest palindrome at right
+            const palindromeLengthAtLeft = table[start - 1][end];
+            // cell on top/right holds longest length of inner palindrome, if any
+            const palindromeLengthAtRight = table[start][end + 1];
+
+            // start and end character position will never be same cause inner loop is reverse from `start - 1` to 0
             if (sequence[start] === sequence[end]) {
-               table[start][end] = 2 + table[start - 1][end + 1];
+               table[start][end] = 2 + innerPalindromeLength;
             } else {
                table[start][end] = Math.max(
-                  table[start - 1][end],
-                  table[start][end + 1]
+                  palindromeLengthAtLeft,
+                  palindromeLengthAtRight
                );
             }
          }
