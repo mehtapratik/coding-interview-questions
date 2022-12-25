@@ -37,6 +37,12 @@
             return condition ? "👍" : "👎";
          }
 
+         function showMatrix(table) {
+            for (let row of table) {
+               console.log(row);
+            }
+         }
+
          console.log = function (...args) {
             old(...args);
             if (args.length === 0) return;
