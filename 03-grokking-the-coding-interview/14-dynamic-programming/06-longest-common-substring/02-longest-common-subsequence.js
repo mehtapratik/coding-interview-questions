@@ -127,7 +127,7 @@ function longestSubsequenceLength(string1, string2) {
       return table[longer.length % 2][shorter.length];
    }
 
-   // TODO: Write a logic to show actual subsequence based on DP table
+   // TODO: Rewrite above implementation to show actual subsequence that you identified
 }
 
 //
