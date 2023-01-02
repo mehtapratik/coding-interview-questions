@@ -144,7 +144,7 @@ function editDistance(target, source) {
          .fill(0)
          .map(() => Array(shorter + 1).fill(0));
 
-      // if target is empty, we have to insert all the characters of source
+      // if longer string is empty, we have to delete/insert all the characters of shorter string
       for (let j = 0; j <= shorter.length; j++) {
          table[0][j] = j;
       }
