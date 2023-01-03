@@ -35,23 +35,6 @@
 // There are other valid topological ordering of the graph too.
 //
 
-//
-// SIMILAR PROBLEMS
-//
-// Problem 1: Find if a given Directed Graph has a cycle in it or not.
-//
-// Solution 1:
-//    If we can’t determine the topological ordering of all the vertices of a directed graph,
-//    the graph has a cycle in it.This was also referred to in the above code:
-
-//    if (sortedOrder.size() != vertices) // topological sort is not possible as the graph has a cycle
-//          return new ArrayList<>();
-// Solution 2:
-//    Try other optimized way of detecting cycle without having to end up with three separate loops
-//    as outlined above. Can we use hasmap of former parents to make sure no children refers former parents
-//    as its dependency?
-//
-
 // EXPLANATION
 //
 // The basic idea behind the topological sort is to provide a partial ordering among the vertices of the graph
