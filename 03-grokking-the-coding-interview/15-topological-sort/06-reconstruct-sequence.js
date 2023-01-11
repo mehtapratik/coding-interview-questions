@@ -33,6 +33,13 @@
 //
 // CODE
 //
+// O(v + n)TS
+// In step ‘d’, each number can become a source only once and each edge (a rule) will be
+// accessed and removed once. Therefore, the time complexity of the above algorithm will
+// be O(V + E), where ‘V’ is the count of distinct numbers and ‘E’ is the total number of the
+// rules. Since, at most, each pair of numbers can give us one rule, we can conclude that the
+// upper bound for the rules is O(N) where ‘N’ is the count of numbers in all sequences. So,
+// we can say that the time complexity of our algorithm is O(V+N).
 function canConstructSequence(originalSequence, sequences) {
    // # 1. Build graph and adjacency list
    const graph = {};
@@ -44,6 +51,12 @@ function canConstructSequence(originalSequence, sequences) {
          graph[child] = graph[child] || { inDegrees: 0 };
          graph[child].inDegrees += 1;
       }
+   }
+
+   // if we don't have ordering rules for all the numbers we'll not able to uniquely
+   // construct the sequence
+   if (Object.keys(graph).length !== originalSequence.length) {
+      return false;
    }
 
    // # 2. Find source nodes
