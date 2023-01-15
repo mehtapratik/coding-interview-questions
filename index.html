@@ -38,11 +38,15 @@
          }
 
          function showMatrix(table) {
-            console.log("<-----------");
+            const out = [];
             for (let row of table) {
-               console.log(row);
+               for (let cell of row) {
+                  out.push(cell);
+                  out.push(" ");
+               }
+               out.push("<br />\n");
             }
-            console.log("----------->");
+            console.log(out.join(""));
          }
 
          console.log = function (...args) {
