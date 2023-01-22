@@ -40,7 +40,7 @@ function ratInAMaze(maze) {
    // O(n)T - where n is number of cells in matrix. Even though we're running 4x recursion call calculation output
    //         will be memoized in `cache` object to avoid computing same r,c combinations again resulting into
    //         each r,c combination calculated once and only once.
-   // O(n)S - for recursion call stack and cache object (2n).
+   // O(n + max(r,c))S - N as number of cells for cache object. And max(row or cells) for recursion call stack.
    function backtrack(row, col) {
       // base case: we reached destination (the bottom/right cell)
       if (
