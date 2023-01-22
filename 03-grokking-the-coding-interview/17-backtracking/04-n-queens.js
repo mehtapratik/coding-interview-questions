@@ -37,7 +37,7 @@
 //
 function nQueens(n) {
    const results = [];
-   return backtrack(0, new Set(), new Set(), new Set(), []);
+   return backtrack(0, new Set(), new Set(), new Set());
 
    // O(n!)T | O(n)S
    // Unlike the brute force approach (n^n), we will only place queens on squares that aren't under attack.
@@ -51,14 +51,15 @@ function nQueens(n) {
    // While it costs O(N2) to build each valid solution, the amount of valid solutions S(N) does not grow
    // nearly as fast as N!, so O(N!+S(N)∗N2) = O(N!).
    //
-   // Extra memory used includes the 4 sets used to store board state, placement positions, as well as
+   // Extra memory used includes the 3 sets used to store board state as well as
    // the recursion call stack. All of this scales linearly with the number of queens. At the deepest level
-   // of DFS chain this would equate to 5n (col + slope + antiSlopes + placements + call stack). This is
+   // of DFS chain this would equate to 4n (col + slope + antiSlopes + call stack). This is
    // asyptotically equal to o(n). We do not count space required to generate output in space complexity.
-   function backtrack(row, cols, slopes, antiSlopes, placements) {
+   function backtrack(row, cols, slopes, antiSlopes) {
       if (row === n) {
-         showMatrix(createBoard(placements));
-         results.push(createBoard(placements));
+         const board = createBoard(cols);
+         showMatrix(board);
+         results.push(board);
          return results;
       }
 
@@ -69,13 +70,11 @@ function nQueens(n) {
             continue;
          }
 
-         placements.push(col);
          cols.add(col);
          slopes.add(slope);
          antiSlopes.add(antiSlope);
 
-         backtrack(row + 1, cols, slopes, antiSlopes, placements);
-         placements.pop();
+         backtrack(row + 1, cols, slopes, antiSlopes);
          cols.delete(col);
          slopes.delete(slope);
          antiSlopes.delete(antiSlope);
