@@ -17,5 +17,3 @@ Welcome to a curated collection of coding challenges! After years of dedicated p
 -  Attempt the challenges in index.js before referring to my solutions.
 
 Wishing you the best of luck on your coding journey!
-
-Questions or feedback? Reach out on [Twitter](https://twitter.com/PratikGMehta).
