@@ -1,0 +1,3 @@
+function generateDocument(source, document) {
+
+}

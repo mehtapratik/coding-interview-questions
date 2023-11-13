@@ -1,0 +1,3 @@
+function runLengthEncoding(string) {
+  
+}
