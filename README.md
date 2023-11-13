@@ -18,4 +18,4 @@ Welcome to a curated collection of coding challenges! After years of dedicated p
 
 Wishing you the best of luck on your coding journey!
 
-Questions or feedback? Reach out on Twitter.
+Questions or feedback? Reach out on [Twitter](https://twitter.com/PratikGMehta)https://twitter.com/PratikGMehta.
