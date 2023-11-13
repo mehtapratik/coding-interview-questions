@@ -1,74 +1,55 @@
 //
 // INSTRUCTIONS
 //
+// Instructions about the problem you're trying to solve, its constraints, etc.
+//
 
 //
-// EXAMPLE
+// EXAMPLES
+//
+// Put down sample inputs and expected outputs. Make sure you
+// cover extremes such as null, empty, invalid sets, etc.
 //
 
 //
 // PREPARATION
 //
+// Any backing data structure or class you will create to support your algorithm, e.g.
+// For Tree problems, you may need to set up a data structure like this:
+/*
+  class TreeNode {
+    constructor(value) {
+      this.value = value;
+      this.left = null;
+      this.right = null;
+    }
+  }
+*/
 
 //
 // CODE
 //
+// Code you will write to solve the asked problem
+/*
+function yourAlgorithm(input) {
+  // Your logic here
+
+  return result;
+}
+*/
 
 //
 // TEST
 //
-/**
- * @param {Node} doc
- * @return {string}
- */
-function tableOfContents(doc) {
-   if (!doc || doc.nodeName !== "#document") {
-      return "";
-   }
+// Console.logs and tests of your algorithm
+/*
+// Test Case 1
+const input1 = "Your input value";
+const output1 = yourAlgorithm(input1);
+console.log("Test Case 1:", output1);
 
-   let hTags = new Set(["h1", "h2", "h3", "h4", "h5", "h6"]);
-   let root = {
-      tag: "root",
-      text: null,
-      children: [],
-   };
-   let parentNode = root;
-   traverse(doc.body);
-   console.log(root);
-   function traverse(element) {
-      if (!element || !element.tagName) {
-         return;
-      }
-      let previousParent = parentNode;
-      if (hTags.has(element.tagName.toLowerCase())) {
-         const currentNode = {
-            tag: element.tagName,
-            text: element.textContent,
-            children: [],
-         };
-         parentNode.children.push(currentNode);
-         parentNode = currentNode;
-      }
-      (element.childNodes || []).forEach((child) => {
-         traverse(child);
-      });
-
-      parentNode = previousParent;
-   }
-}
-
-const doc = new DOMParser().parseFromString(
-   `<!DOCTYPE html>
-  <body>
-    <h1>Heading1</h1>
-    <h2>Heading2a</h2>
-    <h2>Heading2b</h2>
-    <h3>Heading3a</h3>
-    <h3>Heading3b</h3>
-    <h4>Heading4</h3>
-    <h2>Heading2c</h2>
-  </body>`,
-   "text/html"
-);
-
-const htmlString = tableOfContents(doc);
+// Test Case 2
+const input2 = "Your input value";
+const output2 = yourAlgorithm(input2);
+console.log("Test Case 2:", output2);
+*/
