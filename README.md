@@ -1,6 +1,8 @@
 # Coding Interview Questions
 
-Welcome to a curated collection of coding challenges! After years of dedicated preparation for FAANG interviews and a sheer passion for solving intricate problems, I'm excited to share this repository with you. Whether you're gearing up for an interview or simply enjoy exploring data structures and algorithms, I hope this compilation serves as a valuable resource.
+A curated collection of coding challenges.
+
+Whether you're gearing up for an interview or simply enjoy exploring data structures and algorithms, I hope this compilation serves as a valuable resource.
 
 ## Getting Started
 
