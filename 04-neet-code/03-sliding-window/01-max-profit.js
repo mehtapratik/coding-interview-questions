@@ -29,6 +29,23 @@
 // CODE
 //
 function maximizeProfit(prices) {
+   let [buyPriceIdx, sellPriceIdx, maxProfit] = [0, 1, 0];
+
+   while (sellPriceIdx < prices.length) {
+      const buyPrice = prices[buyPriceIdx];
+      const sellPrice = prices[sellPriceIdx];
+      if (buyPrice >= sellPrice) {
+         buyPriceIdx = sellPriceIdx;
+      }
+      const currentProfit = sellPrice - buyPrice;
+
+      maxProfit = Math.max(maxProfit, currentProfit);
+   }
+
+   return maxProfit;
+}
+
+function maximizeProfitSimplified(prices) {
    let minPrice = Infinity;
    let maxProfit = 0;
    for (let price of prices) {
